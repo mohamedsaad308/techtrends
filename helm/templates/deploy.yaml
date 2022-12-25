@@ -31,4 +31,4 @@ spec:
              path: {{ .Values.readinessProbe }}
              port: 3111
         resources:
-          {{ toYaml .Values.resources | indent 12 }}
+{{ toYaml .Values.resources | indent 12 }}
