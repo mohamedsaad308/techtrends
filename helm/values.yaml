@@ -9,7 +9,7 @@ service:
 
 
 image:
-  repository: techtrends
+  repository: mohamedsaad308/techtrends
   tag: latest
   pullPolicy: IfNotPresent
 
