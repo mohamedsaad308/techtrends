@@ -99,9 +99,19 @@ def create():
 
 @app.route('/healthz')
 def healthcheck():
+    connection = get_db_connection()
+    count = connection.execute(
+        "SELECT count(*) FROM sqlite_master WHERE type='table' AND name='posts'").fetchone()[0]
+    connection.close()
+    if count == 1:
+        res = {"result": "OK - healthy!"}
+        status = 200
+    else:
+        res = {"result": "ERROR - unhealthy!"}
+        status = 500
     response = app.response_class(
-        response=json.dumps({"result": "OK - healthy!"}),
-        status=200,
+        response=json.dumps(res),
+        status=status,
         mimetype='application/json'
     )
     return response
