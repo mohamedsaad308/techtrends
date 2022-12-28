@@ -28,7 +28,7 @@ jobs:
             type=ref,event=branch
             type=ref,event=pr
             type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern=1.${{github.run_number}}
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v2
