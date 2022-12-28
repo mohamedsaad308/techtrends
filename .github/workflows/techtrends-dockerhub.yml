@@ -34,4 +34,3 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: v1.${{github.run_number}}
-          labels: ${{ steps.meta.outputs.labels }}
