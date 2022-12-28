@@ -1,13 +1,11 @@
 name: TechTrends - Package with Docker
 
 on:
-  schedule:
-    - cron: "0 10 * * *"
   push:
     branches:
       - 'main'
     tags:
-      - "v*.*.*"
+      - 'v*'
 
 jobs:
   build:
@@ -18,19 +16,14 @@ jobs:
         name: Checkout
         uses: actions/checkout@v2
       -
-        name: Docker meta
-        id: meta
-        uses: docker/metadata-action@v4
+        name: Docker Metadata action
+        uses: docker/metadata-action@v4.1.1
+
         with:
           # list of Docker images to use as base name for tags
           images: |
             ${{ secrets.DOCKERHUB_USERNAME }}/techtrends
           # generate Docker tags based on the following events/attributes
-          tags: |
-            type=schedule
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v2
