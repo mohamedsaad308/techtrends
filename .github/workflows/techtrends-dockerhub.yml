@@ -25,10 +25,7 @@ jobs:
             ${{ secrets.DOCKERHUB_USERNAME }}/techtrends
           # generate Docker tags based on the following events/attributes
           tags: |
-            type=ref,event=branch
-            type=ref,event=pr
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}, value=1.${{github.run_number}}
+            type=semver,pattern={{major}}.{{minor}}
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -48,5 +45,5 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: v1.${{github.run_number}}
           labels: ${{ steps.meta.outputs.labels }}
